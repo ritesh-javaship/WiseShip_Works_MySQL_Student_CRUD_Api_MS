@@ -2,7 +2,9 @@ package com.wise.ship.mysql.student.crud.api.microservice.rest.controller;
 
 import com.wise.ship.mysql.student.crud.api.microservice.rest.entities.Student;
 import com.wise.ship.mysql.student.crud.api.microservice.rest.services.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/micro-service/serverOne")
 @ResponseBody
+@Validated
 public class StudentRestController {
 
     @Autowired
@@ -22,7 +25,7 @@ public class StudentRestController {
     }
 
     @PostMapping("/students/save")
-    public String saveStudent(@RequestBody Student student) {
+    public String saveStudent(@Valid @RequestBody Student student) {
         studentService.saveStudent(student);
         return "TRUE";
     }
